@@ -1,0 +1,9 @@
+---
+# defaults file for revealjs
+revealjs_dir: /srv
+revealjs_version: 3.6.0
+revealjs_apt_pkgs:
+  - nodejs
+  - nodejs-legacy
+  - npm
+  - git

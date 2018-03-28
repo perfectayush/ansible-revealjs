@@ -1,0 +1,18 @@
+version: "2"
+settings:
+  conductor_base: "ubuntu:16.04"
+services:
+  revealjs:
+    container_name: revealjs
+    hostname: reveal1
+    from: "ubuntu:16.04"
+    working_dir: /srv
+    command: ["npm","start"]
+    dns:
+      - "8.8.8.8"
+    ports:
+      - "8000:8000"
+    roles:
+      - revealjs
+
+registries: {}

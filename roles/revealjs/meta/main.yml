@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Ayush Goyal
+  description: A role for revealjs
+
+  license: GPLv2
+
+  min_ansible_version: 2.4.3
+
+  platforms:
+    - name: Fedora
+      versions:
+        - 16.04
+  galaxy_tags: []
+
+dependencies: []

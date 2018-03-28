@@ -1,0 +1,41 @@
+---
+# tasks file for revealjs
+- name: Install dependent packages
+  apt:
+    name: "{{item}}"
+    state: installed
+    update_cache: yes
+    cache_valid_time: 86400
+  with_items: "{{revealjs_apt_pkgs}}"
+
+- name: Create {{revealjs_dir}} directory
+  file:
+    path: "{{revealjs_dir}}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- name: Fetch revealjs {{revealjs_version}}
+  git:
+    repo: https://github.com/hakimel/reveal.js.git
+    dest: "{{revealjs_dir}}"
+    version: "{{revealjs_version}}"
+
+- name: Clone gamepad plugin
+  git:
+    repo: https://github.com/bibixx/reveal.js-gamepad-plugin.git
+    dest: "{{revealjs_dir}}/plugin/.gamepad_repo"
+    version: 9440d634f2d7a974fd54e44a768f4935d0d04b9d
+
+- name: Link gamepad plugin
+  file:
+    src: "{{revealjs_dir}}/plugin/.gamepad_repo/build"
+    dest: "{{revealjs_dir}}/plugin/gamepad"
+    state: link
+
+- name: Install revealjs dependencies via npm
+  command: "npm install"
+  args:
+    chdir: "{{revealjs_dir}}"
+  changed_when: False
